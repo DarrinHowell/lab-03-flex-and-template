@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css?family=Mali');
+
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: auto;
+  max-width: 960px;
+}
+
+div {
+  height: 20%;
+  margin: 2%;
+  width: 20%;
+}
+
+section {
+  width: 200px;
+}
+
+img {
+  height: 150px;
+  width: 150px;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+  height: 900px;
+  width: 100%;
+  margin: auto;
+}
+
+p {
+  font-family: Mali, sans-serif;
+  font-size: smaller;
+}
+
+footer {
+  clear: both;
+}
