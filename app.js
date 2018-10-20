@@ -2,7 +2,6 @@
 
 const allHorns = [];
 const uniqueNames = [];
-const uniqueHorns = [];
 
 function Horn (hornObject) {
   this.image_url = hornObject.image_url;
@@ -21,22 +20,6 @@ Horn.prototype.render = function(){
 
   $('main').append(photoHTML);
   $(`p`).hide();
-  // $('main').append('<div class = "newAnimal"></div>');
-  // let $hornContainer = $('div[class = "newAnimal"]');
-  // console.log($hornContainer);
-
-  // let $templateHTML = $('#photo-template').html();
-  // // console.log($templateHTML);
-  // $hornContainer.html($templateHTML);
-
-  // $hornContainer.find('h2').text(this.title);
-  // $hornContainer.find('img').attr('src', this.image_url);
-  // $hornContainer.find('img').attr('alt', this.keyword);
-  // $hornContainer.find('p').text(this.description);
-
-
-  // $hornContainer.attr('class', '');
-
 
 }
 
@@ -46,30 +29,18 @@ const readJSON = function(){
   if(top.location.pathname === '/index.html'){
     $.get(json1, data => {
       data.forEach(animal => {
-
         new Horn(animal);
-
       })
-      //   filterAllHorns();
       findUniqueKeyword();
-      findUniqueHorns();
       filter(uniqueNames);
-      // filter(uniqueHorns, "#horns");
-      //   clickHandler();
     }).then(renderAllHorns);
   } else if (top.location.pathname === '/gallery-page2.html'){
     $.get(json2, data => {
       data.forEach(animal => {
-
         new Horn(animal);
-
       })
-      //   filterAllHorns();
       findUniqueKeyword();
-      findUniqueHorns();
       filter(uniqueNames);
-      // filter(uniqueHorns, "#horns");
-    //   clickHandler();
     }).then(renderAllHorns);
   }
 
@@ -104,40 +75,14 @@ function findUniqueKeyword(){
   console.log('these are the ', uniqueNames);
 }
 
-function findUniqueHorns(){
-  console.log('we mad it in to the horns function')
-  console.log(allHorns.length);
-  for(let i = 0; i < allHorns.length; i++){
-    console.log('we made it into the horns for loop')
-    if (!uniqueHorns.includes(allHorns[i].horns)){
-      uniqueHorns.push(allHorns[i].horns);
-    }
-  }
-  console.log('these are the ', uniqueHorns);
-}
-
 $('select').change(function() {
   let $keyWord = $('select option:selected').text();
-  // let $horns = $('select option:selected').text()
-  // selecting all images that do not have that keyword
   $(`img:not([alt=${$keyWord}])`).parent('div').hide();
-  // $(`img:not([data-horns=${$horns}])`).parent('div').hide();
 });
 
 
 $('#hornSortButton').click(function() {
-  console.log(this.value);
-
-  let renderedDivs = $('main').children('section');
-  console.log('these are the rendered Divs', renderedDivs);
-
-  renderedDivs.sort(function(a,b) {
-    return a.horns - b.horns;
-  })
-  console.log(renderedDivs);
-
-  $('main').fadeOut('section');
-  $('main').append(renderedDivs);
+  // console.log(this.value);
 
 });
 
