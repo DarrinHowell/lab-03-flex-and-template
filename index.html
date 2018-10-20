@@ -13,7 +13,7 @@
     <script id="photo-handlebars" type="text/x-handlebars-template" >
       <section id="photo-template">
         <h2>{{title}}</h2>
-        <img src="{{image_url}}" alt="">
+        <img src="{{image_url}}" data-horns="{{horns}}">
         <p>{{description}}</p>
       </section>
     </script>
@@ -37,16 +37,10 @@
         <option value="default">Filter by Keyword</option>
       </select>
 
-      <select id="horns">
-        <option value="default">Filter by Horns</option>
-      </select>
+      <h2>Sort By:</h2>
+        <button id="hornSortButton" value="hornSort">Horns</button>
     </header>
     <main>
-      <section id="photo-template">
-        <h2></h2>
-        <img src="" alt="" data-horns="">
-        <p></p>
-      </section>
     </main>
     <footer>
       &copy; 2018 Code Fellows

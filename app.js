@@ -125,7 +125,9 @@ $('select').change(function() {
 });
 
 
-
+$('#hornSortButton').click(function() {
+  console.log(this.value);
+});
 
 // $('nav').on('click', 'button', function() {
 //   $(`div`).hide();
