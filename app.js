@@ -53,8 +53,8 @@ const readJSON = function(){
       //   filterAllHorns();
       findUniqueKeyword();
       findUniqueHorns();
-      filter(uniqueNames, "#keyword");
-      filter(uniqueHorns, "#horns");
+      filter(uniqueNames);
+      // filter(uniqueHorns, "#horns");
       //   clickHandler();
     }).then(renderAllHorns);
   } else if (top.location.pathname === '/gallery-page2.html'){
@@ -67,8 +67,8 @@ const readJSON = function(){
       //   filterAllHorns();
       findUniqueKeyword();
       findUniqueHorns();
-      filter(uniqueNames, "#keyword");
-      filter(uniqueHorns, "#horns");
+      filter(uniqueNames);
+      // filter(uniqueHorns, "#horns");
     //   clickHandler();
     }).then(renderAllHorns);
   }
@@ -127,6 +127,18 @@ $('select').change(function() {
 
 $('#hornSortButton').click(function() {
   console.log(this.value);
+
+  let renderedDivs = $('main').children('section');
+  console.log('these are the rendered Divs', renderedDivs);
+
+  renderedDivs.sort(function(a,b) {
+    return a.horns - b.horns;
+  })
+  console.log(renderedDivs);
+
+  $('main').fadeOut('section');
+  $('main').append(renderedDivs);
+
 });
 
 // $('nav').on('click', 'button', function() {
