@@ -118,11 +118,14 @@ function findUniqueHorns(){
 
 $('select').change(function() {
   let $keyWord = $('select option:selected').text();
-  let $horns = $('select option:selected').text()
+  // let $horns = $('select option:selected').text()
   // selecting all images that do not have that keyword
   $(`img:not([alt=${$keyWord}])`).parent('div').hide();
-  $(`img:not([data-horns=${$horns}])`).parent('div').hide();
+  // $(`img:not([data-horns=${$horns}])`).parent('div').hide();
 });
+
+
+
 
 // $('nav').on('click', 'button', function() {
 //   $(`div`).hide();
