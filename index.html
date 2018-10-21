@@ -13,7 +13,7 @@
     <script id="photo-handlebars" type="text/x-handlebars-template" >
       <section id="photo-template">
         <h2>{{title}}</h2>
-        <img src="{{image_url}}" data-horns="{{horns}}">        
+        <img src="{{image_url}}" alt="">        
         <p>{{description}}</p>
       </section>
     </script>
@@ -38,7 +38,11 @@
       </select>
 
       <h2>Sort By:</h2>
-        <button id="hornSortButton" value="hornSort">Horns</button>
+        <div class="buttonContainer">
+          <button id="hornSortButton" value="horns">Horns</button>
+          <button id="titleSortButton" value="title">Name</button>
+        </div>
+
     </header>
     <main>
     </main>

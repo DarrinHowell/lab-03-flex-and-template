@@ -1,6 +1,6 @@
 'use strict';
 
-const allHorns = [];
+const _allHorns = [];
 const uniqueNames = [];
 
 function Horn (hornObject) {
@@ -10,7 +10,7 @@ function Horn (hornObject) {
   this.keyword = hornObject.keyword;
   this.horns = hornObject.horns;
 
-  allHorns.push(this);
+  _allHorns.push(this);
 }
 
 Horn.prototype.render = function(){
@@ -58,18 +58,18 @@ function filter(array, id) {
 }
 
 function renderAllHorns () {
-  allHorns.forEach(animal => {
+  _allHorns.forEach(animal => {
     animal.render();
   })
 }
 
 function findUniqueKeyword(){
   console.log('we mad it in to the function')
-  console.log(allHorns.length);
-  for(let i = 0; i < allHorns.length; i++){
+  console.log(_allHorns.length);
+  for(let i = 0; i < _allHorns.length; i++){
     console.log('we made it into the for loop')
-    if (!uniqueNames.includes(allHorns[i].keyword)){
-      uniqueNames.push(allHorns[i].keyword);
+    if (!uniqueNames.includes(_allHorns[i].keyword)){
+      uniqueNames.push(_allHorns[i].keyword);
     }
   }
   console.log('these are the ', uniqueNames);
@@ -81,17 +81,21 @@ $('select').change(function() {
 });
 
 
-$('#hornSortButton').click(function() {
-  // console.log(this.value);
-
+$('.buttonContainer').on('click', 'button', function() {
+  console.log(this.value);
+  let dataType = this.value;
+  console.log('objects before sort', _allHorns)
+  _allHorns.sort( (a,b) => {
+    let flag = 0;
+    if(a[dataType] > b[dataType]){
+      flag = -1;
+    } else if (a[dataType] < b[dataType]){
+      flag = 1;
+    }
+    return flag;
+  })
+  console.log('objects after sort', _allHorns)
+  renderAllHorns();
 });
-
-// $('nav').on('click', 'button', function() {
-//   $(`div`).hide();
-//   const json1 = './page-1.json'
-//   const json2 = './page-2.json';
-//   (this.value === 'page1') ? readJSON(json1) : readJSON(json2);
-//   console.log(this.value);
-// });
 
 readJSON();
