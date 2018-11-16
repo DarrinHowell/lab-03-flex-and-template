@@ -26,29 +26,31 @@ Horn.prototype.render = function(){
 const readJSON = function(){
   const json1 = './page-1.json'
   const json2 = './page-2.json';
+
   if(top.location.pathname === '/index.html'){
     $.get(json1, data => {
       data.forEach(animal => {
         new Horn(animal);
       })
       findUniqueKeyword();
-      filter(uniqueNames);
+      filterHorns();
     }).then(renderAllHorns);
+  
   } else if (top.location.pathname === '/gallery-page2.html'){
     $.get(json2, data => {
       data.forEach(animal => {
         new Horn(animal);
       })
       findUniqueKeyword();
-      filter(uniqueNames);
+      filterHorns();
     }).then(renderAllHorns);
   }
 
 }
 
-function filter(array, id) {
-  array.forEach(value =>{
-    $(id).append('<option class = newItem></option>');
+function filterHorns() {
+  uniqueNames.forEach(value =>{
+    $('select').append('<option class = newItem></option>');
     let $newOption = $('option[class = "newItem"]');
 
     $newOption.text(value);
@@ -88,9 +90,9 @@ $('.buttonContainer').on('click', 'button', function() {
   _allHorns.sort( (a,b) => {
     let flag = 0;
     if(a[dataType] > b[dataType]){
-      flag = -1;
-    } else if (a[dataType] < b[dataType]){
       flag = 1;
+    } else if (a[dataType] < b[dataType]){
+      flag = -1;
     }
     return flag;
   })
@@ -99,3 +101,7 @@ $('.buttonContainer').on('click', 'button', function() {
 });
 
 readJSON();
+
+
+// what we want to do instead of use an if else is to have an eventlistener on the button that 
+// renders our horns based on the click
