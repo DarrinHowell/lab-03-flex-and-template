@@ -1,7 +1,14 @@
 'use strict';
 
+
+// ------ Global Variables ------ //
+
+
 const _allHorns = [];
 const uniqueNames = [];
+
+
+// ------ Constructor Functions  ------ //
 
 function Horn (hornObject) {
   this.image_url = hornObject.image_url;
@@ -23,29 +30,15 @@ Horn.prototype.render = function(){
 
 }
 
-const readJSON = function(){
-  const json1 = './page-1.json'
-  const json2 = './page-2.json';
+// ------ Helper Functions  ------ //
 
-  if(top.location.pathname === '/index.html'){
-    $.get(json1, data => {
-      data.forEach(animal => {
-        new Horn(animal);
-      })
-      findUniqueKeyword();
-      filterHorns();
-    }).then(renderAllHorns);
-  
-  } else if (top.location.pathname === '/gallery-page2.html'){
-    $.get(json2, data => {
-      data.forEach(animal => {
-        new Horn(animal);
-      })
-      findUniqueKeyword();
-      filterHorns();
-    }).then(renderAllHorns);
-  }
 
+function readJSON(JSONFile){
+  $.get(JSONFile, data => {
+    data.forEach(animal => {
+      new Horn(animal);
+    });
+  }).then(renderAllHorns);
 }
 
 function filterHorns() {
@@ -77,12 +70,26 @@ function findUniqueKeyword(){
   console.log('these are the ', uniqueNames);
 }
 
+
+// ------ Event Handlers  ------ //
+
+// rendering images based on nav button
+$('#navButtons').on('click', 'button', function() {
+  event.preventDefault();
+  let pageID = this.value;
+  if(pageID === 'page2') {
+    readJSON('page-2.json');
+  }
+});
+
+// hide according to select value pressed
 $('select').change(function() {
   let $keyWord = $('select option:selected').text();
   $(`img:not([alt=${$keyWord}])`).parent('div').hide();
 });
 
 
+// sort by horns
 $('.buttonContainer').on('click', 'button', function() {
   console.log(this.value);
   let dataType = this.value;
@@ -100,8 +107,9 @@ $('.buttonContainer').on('click', 'button', function() {
   renderAllHorns();
 });
 
-readJSON();
+if(document.URL.contains('index.html')){
+  readJSON('page-1.json');
+}
 
-
-// what we want to do instead of use an if else is to have an eventlistener on the button that 
+// what we want to do instead of use an if else is to have an eventlistener on the button that
 // renders our horns based on the click
